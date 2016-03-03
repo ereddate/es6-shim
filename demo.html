@@ -7,6 +7,10 @@
 	<body>
 		<script src="es6-shim.js"></script>
 		<script>
+			console.log("${0} in ${1}, to ${2}".format("a" ,"ab", "abc"));
+			console.log(" ${0} in ${1}, to ${2} ".trim());
+			console.log("aBcD中国".byteLen());
+
 			console.log("abcdefghijklmnopqrst".includes("abc"));
 			console.log("abcdefghijklmnopqrst".startsWith("abc"));
 			console.log("abcdefghijklmnopqrst".endsWith("rst"));

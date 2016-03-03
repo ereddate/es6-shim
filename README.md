@@ -18,4 +18,8 @@ String.prototype.[includes,startsWith,endsWith,repeat,padStart,padEnd,append,tag
 
 Array.prototype.[delete,clear,has,insert]
 
+String.prototype.[format,trim,byteLen]
+
 ...
+
+详细使用方法，请查看demo.html。

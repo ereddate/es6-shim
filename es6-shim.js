@@ -246,7 +246,7 @@
 				}
 			}
 		}
-	})
+	});
 	extend(String.prototype, {
 		includes: function(str) {
 			var reg = new RegExp(str);
@@ -316,6 +316,19 @@
 		tag: function(data) {
 			var d = this;
 			return d.append(data).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+		},
+		format: function(arg0){
+			var args = arguments;
+			return this.replace(/\$\{(\d+)\}/ig, function(a, b) {
+				var ret = args[(b | 0)];
+				return ret == null ? '' : ret;
+			});
+		},
+		trim: function() {
+			return this.replace(/^[\s\xa0\u3000]+|[\u3000\xa0\s]+$/g, "");
+		},
+		byteLen: function() {
+			return this.replace(/[A-Z\u4E00-\u9FA5\uF900-\uFA2D]/g, "--").length;
 		}
 	});
 })(this);
