@@ -16,6 +16,6 @@ String.prototype.[includes,startsWith,endsWith,repeat,padStart,padEnd,append,tag
 
 另外增加非ES6方法
 
-Array.prototype.[delete,clear,has]
+Array.prototype.[delete,clear,has,insert]
 
 ...

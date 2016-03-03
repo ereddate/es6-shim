@@ -228,6 +228,10 @@
 						return value == obj;
 					});
 					return !result ? false : true;
+				},
+				insert: function(num, obj) {
+					this.splice(num, 0, obj);
+					return this;
 				}
 			});
 			extend(Function.prototype, {
@@ -423,6 +427,7 @@
 			console.log([1,2,3].delete(1));
 			console.log([1,2,3].clear());
 			console.log([1,2,3].has(1));
+			console.log([1,2,3].insert(1, 4));
 
 			console.log((function(a,b){}).getLength())
 			console.log((function(a){}).getLength())
