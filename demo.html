@@ -214,6 +214,20 @@
 						}
 					}
 					return false;
+				},
+				delete: function(num) {
+					this.splice(num, 1);
+					return this;
+				},
+				clear: function() {
+					this.length = 0;
+					return this;
+				},
+				has: function(obj) {
+					var result = this.find(function(value, index, arr){
+						return value == obj;
+					});
+					return !result ? false : true;
 				}
 			});
 			extend(Function.prototype, {
@@ -406,6 +420,9 @@
 			console.log([1,2,3].includes(NaN))
 			console.log([1,2,3].includes(2, 1))
 			console.log([1,2,3].includes(2, -2))
+			console.log([1,2,3].delete(1));
+			console.log([1,2,3].clear());
+			console.log([1,2,3].has(1));
 
 			console.log((function(a,b){}).getLength())
 			console.log((function(a){}).getLength())
