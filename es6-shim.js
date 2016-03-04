@@ -299,6 +299,26 @@
 				this.nextIndex = -1;
 			}
 			return result;
+		},
+		before: function() {
+			this.nextIndex--;
+			var result = {
+				value: 0,
+				done: false
+			};
+			if (this.nextIndex < 0) {
+				this.nextIndex = -1;
+				result = {
+					value: undefined,
+					done: true
+				};
+			} else {
+				result = {
+					value: this[this.nextIndex],
+					done: false
+				};
+			}
+			return result;
 		}
 	});
 	extend(Function.prototype, {
