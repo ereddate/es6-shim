@@ -94,6 +94,43 @@
 			return Math.log(v) / Math.LN2;
 		}
 	});
+
+	function r(a) {
+		var b = "length" in a && a.length,
+			c = (typeof a).toLowerCase();
+		return "array" === c || 0 === b || "number" === typeof b && b > 0 && b - 1 in a
+	}
+
+	function each(arr, callback) {
+		if (r(arr)) {
+			var len = arr.length,
+				i;
+			for (i = 0; i < len; i++) {
+				var result = callback.call(arr[i], i, arr[i], arr);
+				if (result === false) break;
+			}
+		} else if (typeof arr === "object" && "constructor" in arr) {
+			for (name in arr) {
+				var result = callback.call(arr[name], name, arr[name], arr);
+				if (result === false) break;
+			}
+		}
+	}
+
+	extend(Object, {
+		each: function(obj, callback) {
+			each(obj, callback);
+			return obj;
+		}
+	});
+
+	extend(Object.prototype, {
+		each: function(callback) {
+			each(this, callback);
+			return this;
+		}
+	});
+
 	extend(Array, {
 		form: function(v) {
 			if (typeof v === "object" && "constructor" in v) {
@@ -125,6 +162,10 @@
 				}
 			}
 			return a;
+		},
+		each: function(arr, callback) {
+			each(arr, callback);
+			return arr;
 		}
 	});
 	extend(Array.prototype, {
@@ -231,6 +272,10 @@
 		insert: function(num, obj) {
 			this.splice(num, 0, obj);
 			return this;
+		},
+		each: function(callback) {
+			each(this, callback);
+			return this;
 		}
 	});
 	extend(Function.prototype, {
@@ -317,7 +362,7 @@
 			var d = this;
 			return d.append(data).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 		},
-		format: function(arg0){
+		format: function(arg0) {
 			var args = arguments;
 			return this.replace(/\$\{(\d+)\}/ig, function(a, b) {
 				var ret = args[(b | 0)];

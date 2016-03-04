@@ -7,7 +7,40 @@
 	<body>
 		<script src="es6-shim.js"></script>
 		<script>
-			console.log("${0} in ${1}, to ${2}".format("a" ,"ab", "abc"));
+			Array.each([1, 2, 3], function(i, value, arr) {
+				console.log(i, value);
+			});
+			[1, 2, 3].each(function(i, value, arr) {
+				console.log(i, value);
+				if (i == 1) return false;
+			});
+
+			var b = {
+					a: 1,
+					b: 2,
+					c: 3
+				},
+				c = {},
+				d = {};
+
+			b.each(function(name, value, obj) {
+				c[name] = value;
+			});
+
+			console.log(c)
+
+			Object.each({
+				a: 1,
+				b: 2,
+				c: 3,
+				d: 4
+			}, function(name, value, obj) {
+				d[name] = value;
+			});
+
+			console.log(d)
+
+			console.log("${0} in ${1}, to ${2}".format("a", "ab", "abc"));
 			console.log(" ${0} in ${1}, to ${2} ".trim());
 			console.log("aBcD中国".byteLen());
 
@@ -32,12 +65,12 @@
 			console.log("abc ${$data.$title} def, ${$data.$key}.".append());
 			console.log("abc ${key} def.".append());
 			console.log("abc ${key} def.".append({
-				key:"cccc"
+				key: "cccc"
 			}));
 			console.log("abc <div>${key}&</div> def.".tag({
-				key:"cccc"
+				key: "cccc"
 			}));
-			
+
 			console.log(Number.isFinite(15))
 			console.log(Number.isFinite(NaN))
 			console.log(Number.isFinite(0.8))
@@ -47,8 +80,8 @@
 			console.log(Number.isNaN(NaN))
 			console.log(Number.isNaN(15))
 			console.log(Number.isNaN('15'))
-			console.log(Number.isNaN(9/NaN))
-			console.log(Number.isNaN('true'/0))
+			console.log(Number.isNaN(9 / NaN))
+			console.log(Number.isNaN('true' / 0))
 			console.log(Number.isNaN(true))
 			console.log(Number.parseInt('12.34'))
 			console.log(Number.parseInt('12.34#'))
@@ -84,47 +117,49 @@
 			console.log(Math.expm1(1))
 			console.log(Math.expm1(0))
 
-			console.log(Array.form([1,2]))
-			console.log(Array.form({a:1}))
+			console.log(Array.form([1, 2]))
+			console.log(Array.form({
+				a: 1
+			}))
 			console.log(Array.form('string'))
 
-			function a(){
+			function a() {
 				var args = arguments;
 				console.log(Array.form(args));
 			}
-			a(1,"a",3)
-			console.log(Array.of(1,2,3))
+			a(1, "a", 3)
+			console.log(Array.of(1, 2, 3))
 			console.log(Array.of(3))
 			console.log(Array.of(3).length)
 			console.log(Array.of())
 			console.log(Array.of(undefined))
 			console.log(Array.of(1, undefined))
-			console.log([1,2,3,4,5,6].copyWithin(0, 3, 5))
-			console.log([1,2,3,4,5,6].copyWithin(0, 2))
-			console.log([1,2,3,4,5,6].copyWithin(0, -3))
-			console.log([1,2,3,4,5,6].copyWithin(0, -3, -2))
-			console.log([1,2,3,4,5,6].find(function(value, index, arr){
+			console.log([1, 2, 3, 4, 5, 6].copyWithin(0, 3, 5))
+			console.log([1, 2, 3, 4, 5, 6].copyWithin(0, 2))
+			console.log([1, 2, 3, 4, 5, 6].copyWithin(0, -3))
+			console.log([1, 2, 3, 4, 5, 6].copyWithin(0, -3, -2))
+			console.log([1, 2, 3, 4, 5, 6].find(function(value, index, arr) {
 				return value > 4;
 			}));
-			console.log([1,2,3,4,5,6].findIndex(function(value, index, arr){
+			console.log([1, 2, 3, 4, 5, 6].findIndex(function(value, index, arr) {
 				return value > 4;
 			}));
-			console.log([1,2,3,4,5,6].fill(7))
-			console.log([1,2,3,4,5,6].fill(7, 1, 2))
-			console.log([1,2,3,4,5,6].fill(7, 3, 5))
-			console.log(["a","b","c","d","e"].fill(7, 2, 4))
-			console.log([1,2,3].includes(3))
-			console.log([1,2,3].includes(4))
-			console.log([1,2,3].includes(NaN))
-			console.log([1,2,3].includes(2, 1))
-			console.log([1,2,3].includes(2, -2))
-			console.log([1,2,3].delete(1));
-			console.log([1,2,3].clear());
-			console.log([1,2,3].has(1));
-			console.log([1,2,3].insert(1, 4));
+			console.log([1, 2, 3, 4, 5, 6].fill(7))
+			console.log([1, 2, 3, 4, 5, 6].fill(7, 1, 2))
+			console.log([1, 2, 3, 4, 5, 6].fill(7, 3, 5))
+			console.log(["a", "b", "c", "d", "e"].fill(7, 2, 4))
+			console.log([1, 2, 3].includes(3))
+			console.log([1, 2, 3].includes(4))
+			console.log([1, 2, 3].includes(NaN))
+			console.log([1, 2, 3].includes(2, 1))
+			console.log([1, 2, 3].includes(2, -2))
+			console.log([1, 2, 3].delete(1));
+			console.log([1, 2, 3].clear());
+			console.log([1, 2, 3].has(1));
+			console.log([1, 2, 3].insert(1, 4));
 
-			console.log((function(a,b){}).getLength())
-			console.log((function(a){}).getLength())
+			console.log((function(a, b) {}).getLength())
+			console.log((function(a) {}).getLength())
 
 		</script>
 	</body>
