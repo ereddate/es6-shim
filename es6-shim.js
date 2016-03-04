@@ -6,7 +6,11 @@
 		}
 		return target;
 	}
+	var maxSafeInteger = Math.pow(2, 53) - 1;
 	extend(Number, {
+		EPSILON: 2.220446049250313e-16,
+		MAX_SAFE_INTEGER: maxSafeInteger,
+		MIN_SAFE_INTEGER: -maxSafeInteger,
 		isFinite: function(value) {
 			var isF = win.isFinite;
 			return typeof value === "number" && isF(value);
@@ -27,7 +31,10 @@
 			var floor = Math.floor,
 				isF = win.isFinite;
 			return typeof value === "number" && isF(value) && value > -9007199254740992 && value < 9007199254740922 && floor(value) === value;
-		}
+		},
+		isSafeInteger: function(value) {
+			return Number.isInteger(value) && Math.abs(value) <= Number.MAX_SAFE_INTEGER;
+		},
 	});
 	extend(Math, {
 		trunc: function(v) {
@@ -276,6 +283,22 @@
 		each: function(callback) {
 			each(this, callback);
 			return this;
+		},
+		nextIndex: -1,
+		next: function() {
+			this.nextIndex++;
+			var result = {
+				value: this[this.nextIndex],
+				done: false
+			};
+			if (this.nextIndex >= this.length) {
+				result = {
+					value: undefined,
+					done: true
+				};
+				this.nextIndex = -1;
+			}
+			return result;
 		}
 	});
 	extend(Function.prototype, {
