@@ -284,6 +284,33 @@
 			each(this, callback);
 			return this;
 		},
+		keys: function() {
+			var a = [],
+				len = this.length,
+				i = 0;
+			for (i = 0; i < len; i++) {
+				a.push(i);
+			}
+			return a;
+		},
+		values: function(){
+			var a = [],
+				len = this.length,
+				i = 0;
+			for (i = 0; i < len; i++) {
+				a.push(this[i]);
+			}
+			return a;
+		},
+		entries: function(){
+			var a = [],
+				len = this.length,
+				i = 0;
+			for (i = 0; i < len; i++) {
+				a.push([i, this[i]]);
+			}
+			return a;
+		},
 		nextIndex: -1,
 		next: function() {
 			this.nextIndex++;

@@ -7,6 +7,9 @@
 	<body>
 		<script src="es6-shim.js"></script>
 		<script>
+			console.log([1,2,3].keys().next())
+			console.log([1,2,3].values().next())
+			console.log([1,2,3].entries().next())
 			Array.each([1, 2, 3], function(i, value, arr) {
 				console.log(i, value);
 			});
