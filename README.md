@@ -8,7 +8,7 @@ Math.[trunc,sign,cbrt,fround,hypot,expm1,log1p,log10,log2]
 
 Array.[form,of]
 
-Array.prototype.[copyWithin,find,findIndex,fill,includes,key,values,key.next,values.next,entries,entries.next]
+Array.prototype.[copyWithin,find,findIndex,fill,includes,keys,values,keys.next,values.next,entries,entries.next]
 
 Function.prototype.[getLength]
 
