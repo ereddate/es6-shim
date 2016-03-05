@@ -140,19 +140,19 @@
 
 	extend(Array, {
 		form: function(v) {
-			if (typeof v === "object" && "constructor" in v) {
-				var a = [];
+			var a=[],i=0;
+			if (typeof v === "object" && "constructor" in v && !r(v)) {
 				for (name in v) {
-					a.push(v[name]);
+					if (!/length/.test(name) && typeof v[name] != "function")
+						a.push(v[name]);
 				}
 				return a;
 			}
-			if (typeof v === "object" && "length" in v) {
-				return v;
+			if (typeof v === "object" && "length" in v && r(v)) {
+				for (i=0;i<v.length;i++) a.push(v[i]);
+				return a;
 			}
 			if (typeof v === "string") {
-				var i = 0,
-					a = [];
 				for (i = 0; i < v.length; i++) a.push(v[i]);
 				return a;
 			}
@@ -353,7 +353,7 @@
 			if ("length" in this) {
 				return this.length;
 			} else {
-				var reg = /\(([^,\)]+,[^,\)]+)\)/.exec(this.toString());
+				var reg = /\(([^,\)\.]+,[^,\)\.]+)\)/.exec(this.toString());
 				if (reg) {
 					return reg[1].split(',').length;
 				} else {
